@@ -81,8 +81,8 @@ h1 .fd{background:linear-gradient(90deg,var(--s-fd),var(--s-gan));-webkit-backgr
 .teaser img{border-radius:14px;box-shadow:var(--shadow)}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:34px 0 6px}
-@media (max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0 6px}
+@media (max-width:820px){.stats{grid-template-columns:1fr}}
 @media (max-width:420px){.stats{grid-template-columns:1fr}}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);text-align:left}
 .stat .v{font:700 2rem/1.1 "Source Serif 4",Georgia,serif;color:var(--ink)}
@@ -222,7 +222,6 @@ footer{margin-top:56px;padding:28px 0 48px;border-top:1px solid var(--line);colo
     <div class="stats">
       <div class="stat reveal"><div class="v">0</div><div class="k">learned discriminators: the critic is solved in closed form from frozen-teacher statistics</div></div>
       <div class="stat reveal"><div class="v">3.7<small>&times;</small></div><div class="k">fewer refinement samples than the matched GAN arm on DMD2 (1.34M vs. 4.93M)</div></div>
-      <div class="stat reveal"><div class="v">25.24</div><div class="k">one-step FID on SANA-0.6B, below its 20-step teacher (26.38)</div></div>
       <div class="stat reveal"><div class="v">4</div><div class="k">distillation frameworks: DMD2, SiD, SiD-DiT and 1.x-Distill</div></div>
     </div>
   </div>
