@@ -6,7 +6,7 @@
 
 <sub>†Corresponding author.</sub>
 
-[**Project page**](https://bhosalems.github.io/FisherDistill/) &nbsp;·&nbsp; arXiv (coming soon) &nbsp;·&nbsp; Code (coming soon)
+[**Project page**](https://bhosalems.github.io/FisherDistill/) &nbsp;·&nbsp; arXiv (coming soon)
 
 ![1024×1024 samples from 2-step FisherDistill on SD3-Medium](docs/static/img/teaser_sd3.jpg)
 <sub>1024×1024 samples from our 2-step FisherDistill built on 1.x-Distill Stage-I and distilled from SD3-Medium.</sub>
