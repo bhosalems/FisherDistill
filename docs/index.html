@@ -159,21 +159,12 @@ tr.grp td{font-weight:600;color:var(--ink2);background:var(--surface2);font-size
 tr.ref td{color:var(--muted)}
 tr.ours td{background:var(--accent-soft);font-weight:600}
 
-/* compare slider */
-.seg{display:inline-flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
-.seg button{border:0;background:transparent;color:var(--ink2);font:600 .84rem Inter,sans-serif;padding:6px 14px;border-radius:999px;cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:8px 0 14px;font-size:.84rem;color:var(--muted)}
-.cmp{position:relative;max-width:720px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);user-select:none;touch-action:none;background:#000;aspect-ratio:1/1}
-.cmp img{position:absolute;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated}
-.cmp .top{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
-.cmp .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:#fff;transform:translateX(-1px);box-shadow:0 0 0 1px rgba(0,0,0,.25)}
-.cmp .handle::after{content:"";position:absolute;top:50%;left:50%;width:38px;height:38px;border-radius:50%;transform:translate(-50%,-50%);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center/20px no-repeat;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.cmp .tag{position:absolute;top:10px;font:600 .78rem Inter,sans-serif;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
-.cmp .tag.l{left:10px} .cmp .tag.r{right:10px}
-.cmp input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
-.cmpcap{text-align:center}
-
+/* grid tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.tab{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 15px;font:500 .88rem Inter,sans-serif;cursor:pointer;transition:background .15s,color .15s}
+.tab:hover{background:var(--surface2)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pix img{image-rendering:pixelated;transition:opacity .18s ease;box-shadow:var(--shadow)}
 /* bibtex */
 pre.bib{position:relative;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow-x:auto;font:400 .82rem/1.6 "JetBrains Mono",ui-monospace,monospace;color:var(--ink)}
 .copy{position:absolute;top:10px;right:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink2);font:600 .76rem Inter,sans-serif;padding:5px 10px;border-radius:8px;cursor:pointer}
@@ -356,21 +347,20 @@ footer{margin-top:56px;padding:28px 0 48px;border-top:1px solid var(--line);colo
     </figure>
   </div>
 
-  <h3>ImageNet 64&times;64, uncurated &mdash; drag to compare</h3>
-  <div class="controls">
-    <span>Base</span>
-    <div class="seg" id="base"><button aria-pressed="true" data-v="dmd">DMD</button><button aria-pressed="false" data-v="sid">SiD</button></div>
-    <span>Compare FisherDistill with</span>
-    <div class="seg" id="vs"><button aria-pressed="true" data-v="gan">GAN</button><button aria-pressed="false" data-v="uid">RealUID</button></div>
+  <h3>ImageNet 64&times;64, uncurated, one step</h3>
+  <p class="note" style="margin-top:-4px">One sample per class for classes 0&ndash;99, identical noise across models.</p>
+  <div class="tabs" role="tablist" aria-label="ImageNet sample grids">
+    <button class="tab" role="tab" aria-selected="true" data-src="grid_fd_dmd2" data-cap="FisherDistill + DMD (FID 1.40)">FisherDistill + DMD</button>
+    <button class="tab" role="tab" aria-selected="false" data-src="grid_gan_dmd2" data-cap="GAN + DMD, i.e. DMD2 (FID 1.42)">GAN + DMD</button>
+    <button class="tab" role="tab" aria-selected="false" data-src="grid_realuid_dmd2" data-cap="RealUID + DMD (FID 3.07)">RealUID + DMD</button>
+    <button class="tab" role="tab" aria-selected="false" data-src="grid_fd_sid" data-cap="FisherDistill + SiD (FID 1.34)">FisherDistill + SiD</button>
+    <button class="tab" role="tab" aria-selected="false" data-src="grid_sida" data-cap="GAN + SiD, i.e. SiD&sup2;A (FID 1.31)">GAN + SiD</button>
+    <button class="tab" role="tab" aria-selected="false" data-src="grid_realsid" data-cap="RealUID + SiD (FID 1.45)">RealUID + SiD</button>
   </div>
-  <div class="cmp" id="cmp">
-    <img class="bot" id="imgR" alt="">
-    <img class="top" id="imgL" alt="">
-    <div class="handle"></div>
-    <span class="tag l" id="tagL"></span><span class="tag r" id="tagR"></span>
-    <input type="range" min="0" max="100" value="50" aria-label="Comparison position" id="range">
-  </div>
-  <p class="note cmpcap" id="cmpcap" style="margin-top:10px"></p>
+  <figure class="pix" style="max-width:640px;margin-left:auto;margin-right:auto">
+    <img id="grid" src="static/img/grid_fd_dmd2.png?v=3" alt="10 by 10 grid of ImageNet 64x64 samples, one per class for classes 0 to 99." decoding="sync">
+    <figcaption id="gridcap" style="text-align:center">FisherDistill + DMD (FID 1.40)</figcaption>
+  </figure>
 </section>
 
 <section id="bibtex" class="reveal">
@@ -434,22 +424,17 @@ footer{margin-top:56px;padding:28px 0 48px;border-top:1px solid var(--line);colo
   });
   if(io){ var mo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){mult.classList.remove('pre');mo.disconnect();}});},{rootMargin:'0px 0px -10% 0px'}); mo.observe(mult); } else mult.classList.remove('pre');
 
-  // compare slider
-  var G={dmd:{fd:['grid_fd_dmd2','FisherDistill + DMD',1.40],gan:['grid_gan_dmd2','GAN + DMD (DMD2)',1.42],uid:['grid_realuid_dmd2','RealUID + DMD',3.07]},
-         sid:{fd:['grid_fd_sid','FisherDistill + SiD',1.34],gan:['grid_sida','GAN + SiD (SiD²A)',1.31],uid:['grid_realsid','RealUID + SiD',1.45]}};
-  var st={base:'dmd',vs:'gan'}, L=document.getElementById('imgL'), R=document.getElementById('imgR'), cmp=document.getElementById('cmp'), cap=document.getElementById('cmpcap');
-  Object.keys(G).forEach(function(b){Object.keys(G[b]).forEach(function(k){var im=new Image(); im.src='static/img/'+G[b][k][0]+'.png?v=3';});});
-  function render(){
-    var a=G[st.base].fd, b=G[st.base][st.vs];
-    L.src='static/img/'+a[0]+'.png?v=3'; R.src='static/img/'+b[0]+'.png?v=3';
-    L.alt=a[1]+' samples'; R.alt=b[1]+' samples';
-    document.getElementById('tagL').textContent=a[1]; document.getElementById('tagR').textContent=b[1];
-    cap.textContent='One sample per class for classes 0–99, identical noise in both. Left: '+a[1]+' (FID '+a[2].toFixed(2)+'). Right: '+b[1]+' (FID '+b[2].toFixed(2)+').';
-  }
-  function seg(id,key){ var el=document.getElementById(id); el.addEventListener('click',function(e){ var bt=e.target.closest('button'); if(!bt) return; [].forEach.call(el.children,function(c){c.setAttribute('aria-pressed',c===bt?'true':'false');}); st[key]=bt.dataset.v; render(); }); }
-  seg('base','base'); seg('vs','vs');
-  var range=document.getElementById('range'); range.addEventListener('input',function(){cmp.style.setProperty('--pos',range.value+'%');});
-  render();
+  // ImageNet grid tabs (preloaded so a click swaps instantly)
+  var tabs=document.querySelectorAll('.tab'), gimg=document.getElementById('grid'), gcap=document.getElementById('gridcap'), cache={};
+  tabs.forEach(function(t){ var im=new Image(); im.src='static/img/'+t.dataset.src+'.png?v=3'; cache[t.dataset.src]=im; });
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(o){o.setAttribute('aria-selected','false')});
+      t.setAttribute('aria-selected','true');
+      gimg.style.opacity='0.25'; gimg.src=cache[t.dataset.src].src; gcap.innerHTML=t.dataset.cap;
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ gimg.style.opacity='1'; }); });
+    });
+  });
 
   // copy bibtex
   document.getElementById('copy').addEventListener('click',function(){
