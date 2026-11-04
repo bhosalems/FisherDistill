@@ -223,7 +223,7 @@ footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);f
     <button class="tab" role="tab" aria-selected="false" data-src="grid_realsid" data-cap="RealUID + SiD (FID 1.45)">RealUID + SiD</button>
   </div>
   <figure class="pix" style="max-width:640px;margin-left:auto;margin-right:auto">
-    <img id="grid" src="static/img/grid_fd_dmd2.png?v=2" alt="10 by 10 grid of ImageNet 64x64 samples, one per class for classes 0 to 99." decoding="sync">
+    <img id="grid" src="static/img/grid_fd_dmd2.png?v=3" alt="10 by 10 grid of ImageNet 64x64 samples, one per class for classes 0 to 99." decoding="sync">
     <figcaption id="gridcap">FisherDistill + DMD (FID 1.40)</figcaption>
   </figure>
 </section>
@@ -242,7 +242,7 @@ footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);f
   var tabs=document.querySelectorAll('.tab'), img=document.getElementById('grid'), cap=document.getElementById('gridcap');
   // Preload every grid so a click swaps instantly (lazy-loaded src swaps may not repaint in some webviews).
   var cache={};
-  tabs.forEach(function(t){ var im=new Image(); im.src='static/img/'+t.dataset.src+'.png?v=2'; cache[t.dataset.src]=im; });
+  tabs.forEach(function(t){ var im=new Image(); im.src='static/img/'+t.dataset.src+'.png?v=3'; cache[t.dataset.src]=im; });
   tabs.forEach(function(t){
     t.addEventListener('click',function(){
       tabs.forEach(function(o){o.setAttribute('aria-selected','false')});
