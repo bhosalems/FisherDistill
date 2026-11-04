@@ -1,10 +1,10 @@
 # FisherDistill: Diffusion Distribution Distillation via Closed-Form Fisher Critics
 
-**Mahesh Bhosale**<sup>1</sup>, **Yuanhao Zhai**<sup>2\*</sup>, **Siwei Lyu**<sup>1</sup>, **Junsong Yuan**<sup>1</sup>, **David Doermann**<sup>1</sup>, **Defang Chen**<sup>3†</sup>
+**Mahesh Bhosale**<sup>1</sup>, **Yuanhao Zhai**<sup>2</sup>, **Siwei Lyu**<sup>1</sup>, **Junsong Yuan**<sup>1</sup>, **David Doermann**<sup>1</sup>, **Defang Chen**<sup>3†</sup>
 
 <sup>1</sup>University at Buffalo, SUNY &nbsp;·&nbsp; <sup>2</sup>Meta &nbsp;·&nbsp; <sup>3</sup>University of California, Berkeley
 
-<sub>\*Work conducted in personal capacity; Meta was not involved. &nbsp; †Corresponding author.</sub>
+<sub>†Corresponding author.</sub>
 
 [**Project page**](https://bhosalems.github.io/FisherDistill/) &nbsp;·&nbsp; arXiv (coming soon) &nbsp;·&nbsp; Code (coming soon)
 
